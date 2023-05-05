@@ -25,7 +25,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from .pagination import DefaultPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from .permissions import IsAdminOrReadOnly
 
 
@@ -54,6 +54,14 @@ class CollectionViewset(viewsets.ModelViewSet):
 
 class ReviewViewset(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
+    http_method_names = ["get", "post", "delete", "head", "options"]
+
+    def get_permissions(self):
+        if self.request.method in "POST":
+            return [IsAuthenticated()]
+        elif self.request.method == "DELETE":
+            return [IsAdminUser()]
+        return [AllowAny()]
 
     def get_queryset(self):
         return Reviews.objects.filter(product_id=self.kwargs["product_pk"])
