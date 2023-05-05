@@ -50,11 +50,9 @@ Authentication is implemented using Djoser. Below are some important endpoints b
 - GET `/store/products/{id}/reviews` - List all product reviews
 - GET `/store/products/{id}/reviews/{id}` - Retrieve a single product review by ID
 - POST `/store/products/{id}/reviews/` - Add review of a product
-- PUT `/store/products/{id}/reviews/{id}` - Update product review
 - DELETE `/store/products/{id}/reviews/{id}` - Delete product review
 
 ### Collections
-
 - GET `/store/collections/` - List all collections
 - GET `/store/collections/{id}/` - Retrieve a single collection by ID
 - POST `/store/collections/` - Add collection (Only admin users)
@@ -83,7 +81,7 @@ These endpoints are secured and only admins can access them.
 - DELETE `/store/customers/{id}` - Delete customer
 
 ### Orders
-
+These endpoints are secured and only authenticated users and admins can access them.
 - GET `/store/orders/` - List all orders if user is admin otherwise only orders of a user
 - GET `/store/orders/{id}/` - Retrieve a single order by ID
 - PATCH `/store/orders/{id}` - Update an order (only admin users)
